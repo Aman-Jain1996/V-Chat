@@ -10,6 +10,8 @@ import {
   PopoverBody,
   PopoverContent,
   PopoverTrigger,
+  useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -18,14 +20,23 @@ import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import CloseIcon from "@mui/icons-material/Close";
-import { Link as ReachLink, NavLink } from "react-router-dom";
+import {
+  Link as ReachLink,
+  NavLink,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const Navigation = () => {
+  const location = useLocation();
+  const authToken = useSelector((state) => state.auth.authToken);
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Flex
       justify="space-between"
       align="center"
-      bg="white.900"
+      bg={useColorModeValue("white.900", "black.800")}
       borderBottom="1px"
       borderBottomColor="gray.400"
       h="max-content"
@@ -35,19 +46,24 @@ export const Navigation = () => {
       top="0"
       zIndex="100"
     >
-      <ReachLink to="/">
+      <ReachLink to={authToken?.token ? "/home" : "/"}>
         <Flex align="center" gap="1" _hover={{ textDecoration: "none" }}>
           <Image
             src="https://res.cloudinary.com/ajain8479/image/upload/v1652887180/Social%20Media/logo512_n05pnf.webp"
             boxSize="16"
           />
-          <Heading fontSize="3xl" fontFamily="dancing">
+          <Heading
+            fontSize="3xl"
+            fontFamily="dancing"
+            color={useColorModeValue("black.800", "white.800")}
+          >
             V-Chat
           </Heading>
         </Flex>
       </ReachLink>
       <Flex
-        bg="#efefef"
+        bg={useColorModeValue("#efefef", "whiteAlpha.200")}
+        color={useColorModeValue("black.800", "white.800")}
         h="3rem"
         borderRadius="md"
         position="absolute"
@@ -88,67 +104,71 @@ export const Navigation = () => {
       </Flex>
       <Flex align="center" gap="8">
         <Flex align="center" gap="4">
-          <NavLink to="/home">
-            <Button
-              variant="iconButton"
-              color="cyan.400"
-              _hover={{
-                color: "black",
-                border: "1px",
-                borderColor: "gray.700",
-                bg: "transparent",
-                boxShadow: "md",
-              }}
-              _active={{
-                boxShadow: "lg",
-              }}
-            >
-              <HomeIcon style={{ fontSize: "2rem" }} />
-            </Button>
-          </NavLink>
-          <NavLink to="/explore">
-            <Button
-              variant="iconButton"
-              color="cyan.400"
-              _hover={{
-                color: "black",
-                border: "1px",
-                borderColor: "gray.700",
-                bg: "transparent",
-                boxShadow: "md",
-              }}
-              _active={{
-                boxShadow: "lg",
-              }}
-            >
-              <ExploreOutlinedIcon style={{ fontSize: "2rem" }} />
-            </Button>
-          </NavLink>
+          {location.pathname !== "/login" && location.pathname !== "/signUp" && (
+            <>
+              <NavLink to="/home">
+                <Button
+                  aria-label="Home Page"
+                  variant="iconButton"
+                  color="cyan.400"
+                  _hover={{
+                    color: useColorModeValue("black.800", "white.800"),
+                    bg: "transparent",
+                    boxShadow: "md",
+                  }}
+                  _active={{
+                    boxShadow: "lg",
+                  }}
+                >
+                  <HomeIcon style={{ fontSize: "2rem" }} />
+                </Button>
+              </NavLink>
+              <NavLink to="/explore">
+                <Button
+                  aria-label="Explore Feed"
+                  variant="iconButton"
+                  color="cyan.400"
+                  _hover={{
+                    color: useColorModeValue("black.800", "white.800"),
+                    bg: "transparent",
+                    boxShadow: "md",
+                  }}
+                  _active={{
+                    boxShadow: "lg",
+                  }}
+                >
+                  <ExploreOutlinedIcon style={{ fontSize: "2rem" }} />
+                </Button>
+              </NavLink>
+            </>
+          )}
           <Button
             variant="iconButton"
-            aria-label="Dark Mode"
+            aria-label="toggle theme"
             color="cyan.400"
+            onClick={toggleColorMode}
             _hover={{
-              color: "black",
-              border: "1px",
+              color: useColorModeValue("black.800", "white.800"),
               borderColor: "gray.700",
               bg: "transparent",
-              boxShadow: "md",
-            }}
-            _active={{
-              boxShadow: "lg",
             }}
           >
-            <LightModeOutlinedIcon style={{ fontSize: "2rem" }} />
+            {colorMode === "light" ? (
+              <LightModeOutlinedIcon style={{ fontSize: "2rem" }} />
+            ) : (
+              <DarkModeIcon style={{ fontSize: "2rem" }} />
+            )}
           </Button>
         </Flex>
-        <Avatar
-          mt="2"
-          size="md"
-          alignSelf="flex-start"
-          name="user"
-          src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png"
-        />
+        {location.pathname !== "/login" && location.pathname !== "/signUp" && (
+          <Avatar
+            mt="2"
+            size="md"
+            alignSelf="flex-start"
+            name="user"
+            src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png"
+          />
+        )}
       </Flex>
     </Flex>
   );

@@ -10,6 +10,8 @@ import {
   MenuItem,
   MenuList,
   MenuDivider,
+  useColorModeValue,
+  useColorMode,
 } from "@chakra-ui/react";
 import React from "react";
 import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
@@ -23,10 +25,11 @@ import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlin
 import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 
 export const PostCard = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Box
       position="relative"
-      bg="white.900"
+      bg={useColorModeValue("white.900", "black.600")}
       w="100%"
       h="max-content"
       boxShadow="xl"
@@ -47,38 +50,47 @@ export const PostCard = () => {
             mt="4"
             justify="flex-start"
           >
-            <Text fontWeight="bold">Aman Jain </Text>
-            <Text fontSize="xs" color="gray.600">
+            <Text fontWeight="bold" color={colorMode === "dark" && "white.800"}>
+              Aman Jain{" "}
+            </Text>
+            <Text
+              fontSize="xs"
+              color={useColorModeValue("gray.600", "gray.200")}
+            >
               {new Date().toDateString() +
                 " , " +
                 new Date().toLocaleTimeString()}
             </Text>
-            <Menu>
+            <Menu isLazy>
               <MenuButton
                 transition="all 0.2s"
                 pos="absolute"
                 top="6"
                 right="8"
                 bg="transparent"
-                color="gray.700"
+                color={useColorModeValue("gray.700", "gray.200")}
                 _hover={{ bg: "transparent" }}
               >
                 <MoreHorizRoundedIcon />
               </MenuButton>
-              <MenuList minW="8rem">
+              <MenuList minW="8rem" bg="white" p="0" overflow="hidden">
                 <MenuGroup>
                   <MenuItem
-                    _hover={{ bg: "cyan.200" }}
+                    _hover={{ bg: "cyan.400" }}
                     bg="inherit"
+                    color="black"
                     fontSize="md"
+                    p="2"
                   >
                     Edit
                   </MenuItem>
-                  <MenuDivider />
+                  <MenuDivider borderColor="gray.400" m="0" />
                   <MenuItem
-                    _hover={{ bg: "cyan.200" }}
+                    _hover={{ bg: "cyan.400" }}
                     bg="inherit"
+                    color="black"
                     fontSize="md"
+                    p="2"
                   >
                     Delete
                   </MenuItem>
@@ -87,7 +99,13 @@ export const PostCard = () => {
             </Menu>
           </Flex>
         </Flex>
-        <Flex py="4" px="6" direction="column" gap="4">
+        <Flex
+          py="4"
+          px="6"
+          direction="column"
+          gap="4"
+          color={colorMode === "dark" && "white.800"}
+        >
           <Text>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et maxime
             perspiciatis autem sit voluptatibus? Nostrum pariatur quis incidunt
@@ -97,12 +115,16 @@ export const PostCard = () => {
           </Text>
           <Image src="https://reactjs.org/logo-og.png" />
         </Flex>
-        <Flex py="4" px="8" gap="8" align="center">
+        <Flex
+          py="4"
+          px="8"
+          gap="8"
+          align="center"
+          color={colorMode === "dark" && "white.800"}
+        >
           <Flex gap="2" align="center" cursor="pointer">
             <ThumbUpOutlinedIcon />
-            <Text color="gray.700" fontWeight="bold">
-              2
-            </Text>
+            <Text fontWeight="bold">2</Text>
           </Flex>
           <Flex gap="2" align="center" cursor="pointer">
             <ThumbDownAltOutlinedIcon />

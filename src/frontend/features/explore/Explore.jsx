@@ -14,11 +14,19 @@ export const Explore = () => {
         <Flex flex="1 1 60%" justify="center">
           <Flex w="70%" justify="center" direction="column" gap="4">
             <Flex width="100%" border="1px" borderColor="gray.200" gap="4">
-              <Button variant="outline" flex="1 1 50%">
+              <Button
+                variant="outline"
+                flex="1 1 50%"
+                aria-label="trending posts"
+              >
                 <TrendingUpOutlinedIcon />
                 <Text pl="2">Trending Posts</Text>
               </Button>
-              <Button variant="outline" flex="1 1 50%">
+              <Button
+                variant="outline"
+                flex="1 1 50%"
+                aria-label="latest posts"
+              >
                 <AccessTimeFilledOutlinedIcon />
                 <Text pl="2">Latest Posts</Text>
               </Button>
