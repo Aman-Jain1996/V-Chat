@@ -1,4 +1,10 @@
-import { Button, Divider, Flex, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Divider,
+  Flex,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import React from "react";
 import { Navigation } from "../../components/Navigation";
 import { CreatePost } from "./CreatePost";
@@ -11,17 +17,39 @@ export const Home = () => {
   return (
     <>
       <Navigation />
-      <Flex m="2rem 6rem" minH="calc(100vh - 4rem)">
+      <Flex
+        m="2rem 6rem"
+        minH="calc(100vh - 4rem)"
+        bg={useColorModeValue("white.800", "white.600")}
+      >
         <Flex flex="1 1 60%" justify="center">
           <Flex w="70%" justify="center" direction="column" gap="4">
             <CreatePost />
             <Divider my="4" borderColor="gray.400" />
-            <Flex width="100%" border="1px" borderColor="gray.200" gap="4">
-              <Button variant="outline" flex="1 1 50%">
+            <Flex
+              width="100%"
+              border="1px"
+              borderColor={useColorModeValue("gray.200", "gray.800")}
+              gap="4"
+              p="4"
+              mb="6"
+              borderRadius="lg"
+              bg={useColorModeValue("white.800", "black.700")}
+              boxShadow="sm"
+            >
+              <Button
+                aria-label="trending posts"
+                variant="outline"
+                flex="1 1 50%"
+              >
                 <TrendingUpOutlinedIcon />
                 <Text pl="2">Trending Posts</Text>
               </Button>
-              <Button variant="outline" flex="1 1 50%">
+              <Button
+                aria-label="latest posts"
+                variant="outline"
+                flex="1 1 50%"
+              >
                 <AccessTimeFilledOutlinedIcon />
                 <Text pl="2">Latest Posts</Text>
               </Button>

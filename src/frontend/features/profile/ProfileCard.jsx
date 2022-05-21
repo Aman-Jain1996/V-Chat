@@ -1,9 +1,44 @@
-import { Avatar, Button, Center, Flex, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Button,
+  Center,
+  Flex,
+  IconButton,
+  Text,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import React from "react";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import { logout } from "../auth/AuthSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export const ProfileCard = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <Flex direction="column" align="center" justify="center">
+    <Flex
+      direction="column"
+      align="center"
+      justify="center"
+      position="relative"
+    >
+      <IconButton
+        color={colorMode === "dark" && "white"}
+        title="Logout"
+        position="absolute"
+        right="8"
+        top="4"
+        aria-label="logout icon"
+        variant="iconButton"
+        icon={<LogoutOutlinedIcon style={{ fontSize: "2rem" }} />}
+        onClick={() => {
+          dispatch(logout());
+          navigate("/", { replace: true });
+        }}
+      ></IconButton>
       <Center mb="4">
         <Avatar
           mt="2"
@@ -13,16 +48,30 @@ export const ProfileCard = () => {
           src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png"
         />
       </Center>
-      <Text fontSize="lg" fontWeight="bold">
-        User Name
+      <Text
+        fontSize="lg"
+        fontWeight="bold"
+        color={colorMode === "dark" && "white.800"}
+      >
+        Aman Jain
       </Text>
-      <Text my="2" fontSize="sm" color="gary.400">
-        User@email.com
+      <Text
+        my="2"
+        fontSize="sm"
+        color={useColorModeValue("gray.700", "gray.300")}
+      >
+        @Aman_Jain
       </Text>
-      <Button my="4" variant="outline">
+      <Button aria-label="Edit Profile" my="4" variant="outline">
         Edit Profile
       </Button>
-      <Text mx="auto" px="2" fontSize="md" textAlign="center">
+      <Text
+        mx="auto"
+        px="2"
+        fontSize="md"
+        textAlign="center"
+        color={colorMode === "dark" && "gray.300"}
+      >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus saepe
         dignissimos perspiciatis cupiditate sit a quam maiores exercitationem
         voluptatem fugit?
@@ -32,22 +81,28 @@ export const ProfileCard = () => {
         mx="4"
         my="6"
         w="80%"
-        bg="white.900"
+        bg={useColorModeValue("white.900", "black.600")}
         p="6"
         boxShadow="lg"
         borderRadius="lg"
       >
         <Flex direction="column" gap="1" align="center">
-          <Text fontWeight="bold">200</Text>
-          <Text>Following</Text>
+          <Text fontWeight="bold" color={colorMode === "dark" && "white.800"}>
+            200
+          </Text>
+          <Text color={colorMode === "dark" && "white.800"}>Following</Text>
         </Flex>
         <Flex direction="column" gap="1" align="center">
-          <Text fontWeight="bold">20</Text>
-          <Text>Posts</Text>
+          <Text fontWeight="bold" color={colorMode === "dark" && "white.800"}>
+            20
+          </Text>
+          <Text color={colorMode === "dark" && "white.800"}>Posts</Text>
         </Flex>
         <Flex direction="column" gap="1" align="center">
-          <Text fontWeight="bold">20.6k</Text>
-          <Text>Followers</Text>
+          <Text fontWeight="bold" color={colorMode === "dark" && "white.800"}>
+            20.6k
+          </Text>
+          <Text color={colorMode === "dark" && "white.800"}>Followers</Text>
         </Flex>
       </Flex>
     </Flex>

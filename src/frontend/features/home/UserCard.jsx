@@ -1,4 +1,12 @@
-import { Avatar, Box, Button, Divider, Flex, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Divider,
+  Flex,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import React from "react";
 import { HomeHeadingTextStyles } from "../../styles/homeStyles";
 
@@ -15,7 +23,11 @@ export const UserCard = () => {
             src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png"
           />
           <Flex direction="column" mx="2" mt="2">
-            <Text fontSize="md" fontWeight="bold">
+            <Text
+              fontSize="md"
+              fontWeight="bold"
+              color={useColorModeValue("black", "white.800")}
+            >
               User Name
             </Text>
             <Text fontSize="xs" mx="2" color="gray.600">
@@ -23,7 +35,8 @@ export const UserCard = () => {
             </Text>
           </Flex>
           <Button
-            bg="cyan.300"
+            aria-label="follow"
+            bg={useColorModeValue("cyan.300", "cyan.400")}
             color="black"
             maxH="12"
             w="max-content"

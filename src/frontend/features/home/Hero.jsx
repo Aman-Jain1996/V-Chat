@@ -1,5 +1,6 @@
 import { Button, Flex, Heading, Image, Text, VStack } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
   HomeContainerHeadingStyles,
@@ -10,8 +11,16 @@ import {
 
 export const Hero = () => {
   const navigate = useNavigate();
+  const authToken = useSelector((state) => state.auth.authToken);
+
+  useEffect(() => {
+    authToken && navigate("/home");
+  }, [authToken]);
+
   return (
     <Flex
+      bg="white"
+      color="black"
       direction="column"
       align="center"
       minH="100vh"
@@ -48,7 +57,11 @@ export const Hero = () => {
             </Flex>
           </Flex>
           <Flex direction="column" gap="4" alignSelf="center">
-            <Button variant="solidPrimary" onClick={() => navigate("/signUp")}>
+            <Button
+              variant="solidPrimary"
+              aria-label="Join Now"
+              onClick={() => navigate("/signUp")}
+            >
               Join Now
             </Button>
             <Link to="/login">

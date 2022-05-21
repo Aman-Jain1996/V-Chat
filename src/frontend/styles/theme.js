@@ -28,7 +28,10 @@ const colors = {
     800: "#fafafa",
   },
   black: {
-    900: "#1a1a1a",
+    900: "000",
+    800: "#1a1a1a",
+    700: "#16181c",
+    600: "#4d4d4d",
   },
 };
 
@@ -41,14 +44,16 @@ const styles = {
   global: (props) => ({
     "html, body": {
       bg: props.colorMode === "dark" ? "gray.900" : "white.800",
+      outline: "none",
     },
     Button: {
-      color: props.colorMode === "light" ? "whiteAlpha.900" : "black.900",
-      bg: props.colorMode === "light" ? "cyan.400" : "cyan.800",
+      color: props.colorMode === "light" ? "whiteAlpha.900" : "black.800",
+      outline: "none",
+      bg: "cyan.400",
       fontSize: "xl",
       fontWeight: "semibold",
       _hover: {
-        bg: props.colorMode === "light" ? "cyan.500" : "cyan.700",
+        bg: "cyan.500",
       },
       _disabled_hover: {
         bg: "unset",

@@ -11,6 +11,7 @@ import {
   Text,
   Textarea,
   Tooltip,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
@@ -19,13 +20,18 @@ import { EmojiContainer } from "./EmojiContainer";
 export const CreatePost = () => {
   return (
     <Box
-      bg="white.900"
+      bg={useColorModeValue("white.900", "black.600")}
       w="100%"
       h="max-content"
       boxShadow="md"
       borderRadius="md"
     >
-      <Text fontSize="xl" p="4" fontWeight="bold">
+      <Text
+        fontSize="xl"
+        p="4"
+        fontWeight="bold"
+        color={useColorModeValue("black", "white.800")}
+      >
         Add New Post
       </Text>
       <Flex direction="column" p="4">
@@ -41,10 +47,15 @@ export const CreatePost = () => {
             height="8rem"
             width="100%"
             resize="none"
+            pt="4"
+            color={useColorModeValue("black", "white.800")}
+            _focus={{
+              borderColor: "inherit",
+            }}
           />
         </Flex>
-        <HStack p="4">
-          <Flex gap="4">
+        <HStack p="4" pl="8">
+          <Flex gap="6">
             <Tooltip hasArrow label="Add Image / Video" aria-label="A tooltip">
               <FormControl width="1rem">
                 <FormLabel
@@ -53,6 +64,7 @@ export const CreatePost = () => {
                   bottom="0"
                   cursor="pointer"
                   marginBottom="0"
+                  color={useColorModeValue("black", "white.800")}
                 >
                   <InsertPhotoIcon />
                 </FormLabel>
@@ -66,7 +78,9 @@ export const CreatePost = () => {
             <EmojiContainer />
           </Flex>
           <Spacer />
-          <Button variant="solidPrimary">Post</Button>
+          <Button variant="solidPrimary" aria-label="Create new Post">
+            Post
+          </Button>
         </HStack>
       </Flex>
     </Box>

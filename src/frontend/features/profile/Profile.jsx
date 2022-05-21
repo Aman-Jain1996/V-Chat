@@ -1,4 +1,4 @@
-import { Divider, Flex, Heading } from "@chakra-ui/react";
+import { Divider, Flex, Heading, useColorMode } from "@chakra-ui/react";
 import React from "react";
 import { PostCard } from "../home/PostCard";
 import { Suggestions } from "../home/Suggestions";
@@ -7,6 +7,7 @@ import { ProfileCard } from "./ProfileCard";
 import { ProfileNav } from "./ProfileNav";
 
 export const Profile = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
       <Navigation />
@@ -19,6 +20,7 @@ export const Profile = () => {
           justify="center"
           maxH="calc(100vh - 4rem)"
           mb="2rem"
+          color={colorMode === "dark" && "white"}
         >
           <ProfileNav />
         </Flex>

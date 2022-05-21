@@ -33,7 +33,7 @@ export const EmojiContainer = () => {
             color={useColorModeValue("gray.800", "white.900")}
             paddingBottom="0"
           >
-            <EmojiEmotionsRoundedIcon />
+            {/* <EmojiEmotionsRoundedIcon /> */}
           </Button>
         </PopoverTrigger>
         <PopoverContent>
