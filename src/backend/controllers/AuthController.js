@@ -49,7 +49,6 @@ export const signupHandler = function (schema, request) {
     const { password: pass, ...user } = createdUser.attrs;
     return new Response(201, {}, { user, encodedToken });
   } catch (error) {
-    console.log(error);
     return new Response(
       500,
       {},

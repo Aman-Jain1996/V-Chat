@@ -34,6 +34,7 @@ export const Hero = () => {
           flex="1 1 50%"
           maxW="xl"
           src="https://res.cloudinary.com/ajain8479/image/upload/v1652353394/Social%20Media/Header_eyg9tp.webp"
+          alt="Hero Banner"
           transform="skew(0deg,-5deg)"
         />
         <VStack flex="1 1 50%" pt="20" d="flex">

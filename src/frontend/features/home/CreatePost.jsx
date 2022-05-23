@@ -40,7 +40,7 @@ export const CreatePost = () => {
             mt="2"
             alignSelf="flex-start"
             name="user"
-            src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png"
+            src="https://res.cloudinary.com/ajain8479/image/upload/v1653216526/Social%20Media/4333609_iftyzl.webp"
           />
           <Textarea
             placeholder="Whats happening?"

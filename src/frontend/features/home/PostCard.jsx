@@ -42,7 +42,7 @@ export const PostCard = () => {
             size="lg"
             alignSelf="flex-start"
             name="user"
-            src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png"
+            src="https://res.cloudinary.com/ajain8479/image/upload/v1653216526/Social%20Media/4333609_iftyzl.webp"
           />
           <Flex
             alignSelf="flex-start"
@@ -113,7 +113,7 @@ export const PostCard = () => {
             inventore vel quia laborum quae? Velit dolore debitis minima, autem
             officiis aut maxime!
           </Text>
-          <Image src="https://reactjs.org/logo-og.png" />
+          <Image src="https://reactjs.org/logo-og.png" alt="post image" />
         </Flex>
         <Flex
           py="4"

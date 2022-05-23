@@ -29,8 +29,9 @@ import {
 import { useSelector } from "react-redux";
 
 export const Navigation = () => {
+  const navigate = useNavigate();
   const location = useLocation();
-  const authToken = useSelector((state) => state.auth.authToken);
+  const { authToken, userDetails } = useSelector((state) => state.auth);
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Flex
@@ -50,6 +51,7 @@ export const Navigation = () => {
         <Flex align="center" gap="1" _hover={{ textDecoration: "none" }}>
           <Image
             src="https://res.cloudinary.com/ajain8479/image/upload/v1652887180/Social%20Media/logo512_n05pnf.webp"
+            alt="User Avatar"
             boxSize="16"
           />
           <Heading
@@ -162,11 +164,13 @@ export const Navigation = () => {
         </Flex>
         {location.pathname !== "/login" && location.pathname !== "/signUp" && (
           <Avatar
+            onClick={() => navigate(`/users/${userDetails.username}`)}
             mt="2"
             size="md"
             alignSelf="flex-start"
-            name="user"
-            src="https://cdn-icons-png.flaticon.com/128/4333/4333609.png"
+            name={userDetails.firstName + userDetails.lastName}
+            src={userDetails.avatarURL}
+            alt="user Image"
           />
         )}
       </Flex>

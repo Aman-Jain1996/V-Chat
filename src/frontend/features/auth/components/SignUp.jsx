@@ -32,8 +32,8 @@ export const SignUp = () => {
   }, [authToken]);
 
   const initialState = {
-    fName: "",
-    lName: "",
+    firstName: "",
+    lastName: "",
     username: "",
     password: "",
   };
@@ -50,13 +50,13 @@ export const SignUp = () => {
     validate: (values) => {
       let errors = {};
 
-      if (!values.fName.trim()) errors.fName = "First Name is mandatory";
-      else if (!new RegExp("[A-Za-z]+").test(values.fName))
-        errors.fName = "Only Alphabets allowed";
+      if (!values.firstName.trim()) errors.firstName = "First Name is mandatory";
+      else if (!new RegExp("[A-Za-z]+").test(values.firstName))
+        errors.firstName = "Only Alphabets allowed";
 
-      if (!values.lName.trim()) errors.lName = "Last Name is mandatory";
-      else if (!new RegExp("[A-Za-z]+").test(values.lName))
-        errors.lName = "Only Alphabets allowed";
+      if (!values.lastName.trim()) errors.lastName = "Last Name is mandatory";
+      else if (!new RegExp("[A-Za-z]+").test(values.lastName))
+        errors.lastName = "Only Alphabets allowed";
 
       if (!values.username.trim()) errors.username = "Username is mandatory";
       else if (!new RegExp("^[a-zA-Z0-9_.]+$").test(values.username))
@@ -108,46 +108,46 @@ export const SignUp = () => {
           >
             <Flex gap="4">
               <FormControl isRequired>
-                <FormLabel htmlFor="fName" color="black.800">
+                <FormLabel htmlFor="firstName" color="black.800">
                   First Name
                 </FormLabel>
                 <Input
                   color="black.800"
-                  id="fName"
+                  id="firstName"
                   placeholder="Enter your first name"
                   type="text"
                   borderColor="gray.600"
-                  name="fName"
-                  value={formik.values.fName}
+                  name="firstName"
+                  value={formik.values.firstName}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   _hover={{ borderColor: "gray" }}
                 />
-                {formik.touched.fName && formik.errors.fName && (
+                {formik.touched.firstName && formik.errors.firstName && (
                   <Box color="red" fontSize="sm" px="4" pt="2">
-                    {formik.errors.fName}
+                    {formik.errors.firstName}
                   </Box>
                 )}
               </FormControl>
               <FormControl isRequired>
-                <FormLabel htmlFor="lName" color="black.800">
+                <FormLabel htmlFor="lastName" color="black.800">
                   Last Name
                 </FormLabel>
                 <Input
                   color="black.800"
                   placeholder="Enter your last Name"
-                  id="lName"
+                  id="lastName"
                   type="text"
                   borderColor="gray.600"
-                  name="lName"
-                  value={formik.values.lName}
+                  name="lastName"
+                  value={formik.values.lastName}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   _hover={{ borderColor: "gray" }}
                 />
-                {formik.touched.lName && formik.errors.lName && (
+                {formik.touched.lastName && formik.errors.lastName && (
                   <Box color="red" fontSize="sm" px="4" pt="2">
-                    {formik.errors.lName}
+                    {formik.errors.lastName}
                   </Box>
                 )}
               </FormControl>
