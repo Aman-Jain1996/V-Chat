@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { LoginService, SignUpService } from "../../services";
+import {
+  LoginService,
+  SignUpService,
+  updateUserDetailsService,
+} from "../../services";
 import { ToastHandler } from "../../utils/toastUtils";
 
 export const loginAction = createAsyncThunk(
@@ -31,6 +35,23 @@ export const signUpAction = createAsyncThunk(
       if (error.response.status === 422)
         ToastHandler("error", "Username already exists!");
       else ToastHandler("error", "Couldn't Signup! Please try again.");
+      console.error(error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const updateUserDetails = createAsyncThunk(
+  "auth/updateUserDetails",
+  async ({ userData, authToken }, { rejectWithValue }) => {
+    try {
+      console.log(userData);
+      const response = await updateUserDetailsService(userData, authToken);
+      return response.data.user;
+    } catch (error) {
+      if (error.response.status === 404)
+        ToastHandler("error", "User not registered!");
+      else ToastHandler("error", "Unable to update User details!");
       console.error(error.response.data);
       return rejectWithValue(error.response.data);
     }
@@ -96,6 +117,14 @@ export const authSlice = createSlice({
     },
     [signUpAction.rejected]: (state) => {
       state.isLoading = "false";
+    },
+    [updateUserDetails.fulfilled]: (state, action) => {
+      state.userDetails = action.payload;
+      localStorage.setItem(
+        "userDetails",
+        JSON.stringify({ user: state.userDetails })
+      );
+      ToastHandler("success", "Profile Updated");
     },
   },
 });

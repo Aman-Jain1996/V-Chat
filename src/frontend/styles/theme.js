@@ -106,6 +106,9 @@ export const components = {
           background: "cyan.400",
           color: "whiteAlpha.900",
         },
+        _active: {
+          color: "black.900",
+        },
       },
       link: {
         color: "cyan.400",

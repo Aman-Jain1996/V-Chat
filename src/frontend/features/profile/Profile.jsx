@@ -1,14 +1,25 @@
 import { Divider, Flex, Heading, useColorMode } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { PostCard } from "../home/PostCard";
 import { Suggestions } from "../home/Suggestions";
 import { Navigation } from "../../components/Navigation";
 import { ProfileCard } from "./ProfileCard";
 import { ProfileNav } from "./ProfileNav";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserDetails } from "./ProfileSlice";
+import { Loading } from "../../components";
 
 export const Profile = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  return (
+  
+  const { userDetails } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  
+
+  return !userDetails?.username ? (
+    <Loading />
+  ) : (
     <>
       <Navigation />
       <Flex m="2rem 4rem" minH="calc(100vh - 4rem)">

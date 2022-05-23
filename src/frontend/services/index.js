@@ -1,1 +1,6 @@
-export { LoginService, SignUpService } from "./authService";
+export {
+  LoginService,
+  SignUpService,
+  updateUserDetailsService,
+} from "./authService";
+export { getAllUsersService, getUserDetails } from "./userService";
