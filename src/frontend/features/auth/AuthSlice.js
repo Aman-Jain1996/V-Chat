@@ -45,7 +45,6 @@ export const updateUserDetails = createAsyncThunk(
   "auth/updateUserDetails",
   async ({ userData, authToken }, { rejectWithValue }) => {
     try {
-      console.log(userData);
       const response = await updateUserDetailsService(userData, authToken);
       return response.data.user;
     } catch (error) {
@@ -64,16 +63,16 @@ const initialState = {
   isLoading: false,
 };
 
-export const authSlice = createSlice({
+const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
     logout: (state) => {
       localStorage.removeItem("authToken");
       localStorage.removeItem("userDetails");
-      (state.authToken = null),
-        (state.userDetails = null),
-        (state.isLoading = false);
+      state.authToken = null;
+      state.userDetails = null;
+      state.isLoading = false;
       ToastHandler("success", "Logged-out Successfully!");
     },
   },
@@ -129,4 +128,4 @@ export const authSlice = createSlice({
   },
 });
 export const { logout } = authSlice.actions;
-export default authSlice.reducer;
+export const authReducer = authSlice.reducer;

@@ -15,8 +15,8 @@ export const getAllUsersHandler = function () {
 };
 
 /**
- * This handler handles get a user from userId in the db.
- * send GET Request at /api/users/:userId
+ * This handler handles get a user from username in the db.
+ * send GET Request at /api/users/:username
  * */
 
 export const getUserHandler = function (schema, request) {
