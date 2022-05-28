@@ -164,7 +164,7 @@ export const Navigation = () => {
         </Flex>
         {location.pathname !== "/login" && location.pathname !== "/signUp" && (
           <Avatar
-            onClick={() => navigate(`/users/${userDetails.username}`)}
+            onClick={() => navigate(`/user/${userDetails.username}`)}
             mt="2"
             size="md"
             alignSelf="flex-start"

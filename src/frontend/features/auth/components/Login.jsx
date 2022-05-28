@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Navigation } from "../../../components/Navigation";
 import { HomeContainerHeadingStyles } from "../../../styles/homeStyles";
 import {
   Box,
@@ -23,6 +22,7 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../AuthSlice";
+import { Navigation } from "../../../components";
 
 export const Login = () => {
   const dispatch = useDispatch();

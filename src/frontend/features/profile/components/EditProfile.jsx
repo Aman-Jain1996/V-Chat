@@ -21,16 +21,16 @@ import {
   formControlFields,
   formControlStyles,
   formControlText,
-} from "../../styles/globalStyles";
-import { ToastHandler } from "../../utils/toastUtils";
+} from "../../../styles/globalStyles";
+import { ToastHandler } from "../../../utils/toastUtils";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserDetails } from "../auth/AuthSlice";
+import { updateUserDetails } from "../../../features";
 
-export const EditProfile = ({ userDetails }) => {
+export const EditProfile = ({ profileDetails }) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const [bio, setBio] = useState(userDetails.bio);
-  const [websiteURL, setWebsiteURL] = useState(userDetails.websiteURL);
-  const [avatarURL, setAvatarURL] = useState(userDetails.avatarURL);
+  const [bio, setBio] = useState(profileDetails?.bio);
+  const [websiteURL, setWebsiteURL] = useState(profileDetails?.websiteURL);
+  const [avatarURL, setAvatarURL] = useState(profileDetails?.avatarURL);
   const dispatch = useDispatch();
   const { authToken } = useSelector((state) => state.auth);
 
@@ -55,7 +55,7 @@ export const EditProfile = ({ userDetails }) => {
   const updateHandler = () => {
     dispatch(
       updateUserDetails({
-        userData: { ...userDetails, bio, websiteURL, avatarURL },
+        userData: { ...profileDetails, bio, websiteURL, avatarURL },
         authToken,
       })
     );
@@ -106,7 +106,7 @@ export const EditProfile = ({ userDetails }) => {
                   alt="profile-image"
                   size="lg"
                   marginRight="2"
-                  name={userDetails.firstName + userDetails.lastName}
+                  name={profileDetails?.firstName + profileDetails?.lastName}
                 >
                   <AvatarBadge boxSize="1.5em" border="0">
                     <FormControl>
@@ -134,7 +134,9 @@ export const EditProfile = ({ userDetails }) => {
                   {...formControlFields}
                   variant="unstyled"
                   isReadOnly
-                  value={userDetails.firstName + " " + userDetails.lastName}
+                  value={
+                    profileDetails?.firstName + " " + profileDetails?.lastName
+                  }
                 />
               </FormControl>
               <FormControl {...formControlStyles}>
@@ -143,7 +145,7 @@ export const EditProfile = ({ userDetails }) => {
                   {...formControlFields}
                   variant="unstyled"
                   isReadOnly
-                  value={userDetails.username}
+                  value={profileDetails?.username}
                 />
               </FormControl>
               <FormControl {...formControlStyles}>

@@ -1,17 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getUserDetails } from "../../services";
+import { getUserDetailsService } from "../../services";
 import { ToastHandler } from "../../utils/toastUtils";
 import { logout } from "../auth/AuthSlice";
 
 const initialState = {
-  userDetails: null,
+  profileDetails: null,
 };
 
 export const fetchUserDetails = createAsyncThunk(
   "profile/fetchUserDetails",
   async (username, { rejectWithValue }) => {
     try {
-      const response = await getUserDetails(username);
+      const response = await getUserDetailsService(username);
       return response.data.user;
     } catch (error) {
       ToastHandler("error", "Unable to fetch User details!");
@@ -27,12 +27,12 @@ const profileSlice = createSlice({
   reducers: {},
   extraReducers: {
     [logout.fulfilled]: (state) => {
-      state.userDetails = null;
+      state.profileDetails = null;
     },
     [fetchUserDetails.fulfilled]: (state, action) => {
-      state.userDetails = action.payload;
+      state.profileDetails = action.payload;
     },
   },
 });
 
-export default profileSlice.reducer;
+export const profileReducer = profileSlice.reducer;

@@ -12,14 +12,14 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
-import { Navigation } from "../../../components/Navigation";
 import { HomeContainerHeadingStyles } from "../../../styles/homeStyles";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { signUpAction } from "../AuthSlice";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
+import { signUpAction } from "../AuthSlice";
+import { Navigation } from "../../../components";
 
 export const SignUp = () => {
   const dispatch = useDispatch();
@@ -50,7 +50,8 @@ export const SignUp = () => {
     validate: (values) => {
       let errors = {};
 
-      if (!values.firstName.trim()) errors.firstName = "First Name is mandatory";
+      if (!values.firstName.trim())
+        errors.firstName = "First Name is mandatory";
       else if (!new RegExp("[A-Za-z]+").test(values.firstName))
         errors.firstName = "Only Alphabets allowed";
 

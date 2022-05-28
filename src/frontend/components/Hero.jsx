@@ -7,7 +7,7 @@ import {
   HomeHeadingSubTextStyles,
   HomeHeadingTextStyles,
   HomeTextContainerStyles,
-} from "../../styles/homeStyles";
+} from "../styles/homeStyles";
 
 export const Hero = () => {
   const navigate = useNavigate();
