@@ -25,6 +25,13 @@ import {
   unfollowUserHandler,
   editUserHandler,
 } from "./backend/controllers/UserController";
+import {
+  addPostCommentHandler,
+  deletePostCommentHandler,
+  editPostCommentHandler,
+  getPostCommentsHandler,
+  upvotePostCommentHandler,
+} from "./backend/controllers/CommentController";
 
 export function makeServer({ environment = "development" } = {}) {
   return new Server({
@@ -91,6 +98,24 @@ export function makeServer({ environment = "development" } = {}) {
         "https://api.cloudinary.com/v1_1/ajain8479/video/upload",
         "https://api.cloudinary.com/v1_1/ajain8479/delete_by_token",
         ["post"]
+      );
+
+      // comments routes (public)
+      this.get("/comments/:postId", getPostCommentsHandler.bind(this));
+
+      //comments routes (private)
+      this.post("/comments/add/:postId", addPostCommentHandler.bind(this));
+      this.post(
+        "/comments/edit/:postId/:commentId",
+        editPostCommentHandler.bind(this)
+      );
+      this.post(
+        "/comments/delete/:postId/:commentId",
+        deletePostCommentHandler.bind(this)
+      );
+      this.post(
+        "/comments/upvote/:postId/:commentId",
+        upvotePostCommentHandler.bind(this)
       );
     },
   });

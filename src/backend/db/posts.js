@@ -1,14 +1,7 @@
-import { v4 as uuid } from "uuid";
-import { formatDate } from "../utils/authUtils";
-
 /**
  * Posts can be added here.
  * You can add default posts of your wish with different attributes
  * */
-
-// rajanshi -> divya
-// devika -> singh
-// rohan -> aman
 
 export const posts = [
   {
@@ -34,7 +27,6 @@ export const posts = [
       {
         _id: "0ccca08e-783f-48c2-93ea-376ecacc82e7",
         content: "Nice Work Aman!",
-        postId: "0fb61929-295b-40b6-a4fe-3e74d17124dd",
         user: {
           _id: "983b0d96-ede2-4ce2-ada7-7aae018bc83a",
           username: "divya",
@@ -63,7 +55,6 @@ export const posts = [
       {
         _id: "67a0302a-4237-4ec2-b5e4-960800515b91",
         content: "Loved It",
-        postId: "0fb61929-295b-40b6-a4fe-3e74d17124dd",
         user: {
           _id: "032e9071-3996-425f-9de1-70a7a4ff93c5",
           username: "vishal_singh",
@@ -118,7 +109,6 @@ export const posts = [
       {
         _id: "7e060580-0009-48a9-8040-37b8505e0adf",
         content: "Link Please",
-        postId: "468e07ed-9872-4bac-83ae-b83ac110fb20",
         user: {
           _id: "983b0d96-ede2-4ce2-ada7-7aae018bc83a",
           username: "divya",
@@ -151,7 +141,6 @@ export const posts = [
       {
         _id: "424bb3b5-6372-41b6-895b-e64bd25adb26",
         content: "Nice work man",
-        postId: "468e07ed-9872-4bac-83ae-b83ac110fb20",
         user: {
           _id: "032e9071-3996-425f-9de1-70a7a4ff93c5",
           username: "vishal_singh",
@@ -171,7 +160,6 @@ export const posts = [
       {
         _id: "5d4cae57-4e10-4c2c-b581-90a48a64b5d6",
         content: "It also have blogs",
-        postId: "468e07ed-9872-4bac-83ae-b83ac110fb20",
         user: {
           _id: "6a21ad3b-5f98-4af8-a00f-e92965b94c3b",
           username: "amanjain",
@@ -208,7 +196,6 @@ export const posts = [
       {
         _id: "73ea112a-d98b-483a-b798-4443c53f8232",
         content: "Looks good",
-        postId: "c2d6e79f-79f4-4a71-bb83-a2064e34d4fc",
         user: {
           _id: "6a21ad3b-5f98-4af8-a00f-e92965b94c3b",
           username: "amanjain",
@@ -249,7 +236,6 @@ export const posts = [
       {
         _id: "522563f0-a5b4-448b-a917-6a33b07531af",
         content: "https://knights-watch-ui.netlify.app/index.html",
-        postId: "63867ea9-8609-48d7-82cb-3c9a47ea2039",
         user: {
           _id: "6a21ad3b-5f98-4af8-a00f-e92965b94c3b",
           username: "amanjain",
@@ -273,7 +259,6 @@ export const posts = [
       {
         _id: "862d453e-bb3b-4715-893d-d41ba8a57d99",
         content: "I am using it in my project",
-        postId: "63867ea9-8609-48d7-82cb-3c9a47ea2039",
         user: {
           _id: "032e9071-3996-425f-9de1-70a7a4ff93c5",
           username: "vishal_singh",
@@ -314,7 +299,6 @@ export const posts = [
       {
         _id: "d327558b-a759-4f57-99fd-92b836d92fde",
         content: "nice work",
-        postId: "4fdb917d-98a4-4b16-85ca-b8b9ada33a13",
         user: {
           _id: "983b0d96-ede2-4ce2-ada7-7aae018bc83a",
           username: "divya",
@@ -343,7 +327,6 @@ export const posts = [
       {
         _id: "793118f3-b675-40d2-8c93-1d2ad6d2452c",
         content: "I like it",
-        postId: "4fdb917d-98a4-4b16-85ca-b8b9ada33a13",
         user: {
           _id: "032e9071-3996-425f-9de1-70a7a4ff93c5",
           username: "vishal_singh",
@@ -464,7 +447,6 @@ export const posts = [
       {
         _id: "2e229e5e-f0c5-4c8d-aa25-4c96bcd2b859",
         content: "great",
-        postId: "c4b02fee-d5e2-47b4-85ff-d85353fff48c",
         user: {
           _id: "983b0d96-ede2-4ce2-ada7-7aae018bc83a",
           username: "divya",
@@ -493,7 +475,6 @@ export const posts = [
       {
         _id: "139b7761-9ab0-431d-959b-dfc0c78db01f",
         content: "I'm curious how you did all that in one go",
-        postId: "c4b02fee-d5e2-47b4-85ff-d85353fff48c",
         user: {
           _id: "032e9071-3996-425f-9de1-70a7a4ff93c5",
           username: "vishal_singh",
@@ -552,7 +533,6 @@ export const posts = [
       {
         _id: "e5f3dda1-32a9-40ff-8d21-d5249d5e06f2",
         content: "👍",
-        postId: "e3ecb1d2-ad45-4a1f-bade-d1585e1f74f5",
         user: {
           _id: "983b0d96-ede2-4ce2-ada7-7aae018bc83a",
           username: "divya",
@@ -567,7 +547,6 @@ export const posts = [
       {
         _id: "b4ab9a29-2157-4890-be9b-40a6fad00b86",
         content: "🤝",
-        postId: "e3ecb1d2-ad45-4a1f-bade-d1585e1f74f5",
         user: {
           _id: "7db8194d-c54d-4b8b-8c75-eecb6417485b",
           username: "akash_singh",
@@ -611,7 +590,6 @@ export const posts = [
       {
         _id: "e5f3dda1-32a9-40ff-8d21-d5249d5e06f2",
         content: "👍",
-        postId: "e3ecb1d2-ad45-4a1f-bade-d1585e1f74fa",
         user: {
           _id: "6a21ad3b-5f98-4af8-a00f-e92965b94c3b",
           username: "amanjain",
@@ -626,7 +604,6 @@ export const posts = [
       {
         _id: "b4ab9a29-2157-4890-be9b-40a6fad00b86",
         content: "All the best!",
-        postId: "e3ecb1d2-ad45-4a1f-bade-d1585e1f74f5",
         user: {
           _id: "7db8194d-c54d-4b8b-8c75-eecb6417485b",
           username: "akash_singh",

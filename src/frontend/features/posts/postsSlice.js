@@ -1,10 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
+  addCommentToPostService,
   createNewPostService,
+  deleteCommentOnPostService,
   deletePostByIdService,
   dislikePostService,
   editPostByIdService,
   getAllPostsService,
+  getCommentsByPostIdService,
   getPostsByUsernameService,
   likePostService,
 } from "../../services";
@@ -109,6 +112,40 @@ export const dislikePost = createAsyncThunk(
   }
 );
 
+export const addCommentToPost = createAsyncThunk(
+  "posts/addCommentToPost",
+  async ({ postId, commentData, authToken }, { rejectWithValue }) => {
+    try {
+      const response = await addCommentToPostService(
+        postId,
+        commentData,
+        authToken
+      );
+      return response.data.posts;
+    } catch (err) {
+      console.error(err.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const deleteCommentFromPost = createAsyncThunk(
+  "posts/deleteCommentFromPost",
+  async ({ postId, commentId, authToken }, { rejectWithValue }) => {
+    try {
+      const response = await deleteCommentOnPostService(
+        postId,
+        commentId,
+        authToken
+      );
+      return response.data.posts;
+    } catch (err) {
+      console.error(err.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -186,6 +223,28 @@ const postsSlice = createSlice({
       state.allPosts = action.payload;
     },
     [dislikePost.rejected]: (state) => {
+      state.postLoading = false;
+    },
+    [addCommentToPost.pending]: (state) => {
+      state.postLoading = true;
+    },
+    [addCommentToPost.fulfilled]: (state, action) => {
+      state.postLoading = false;
+      state.allPosts = action.payload;
+      ToastHandler("success", "Comment Added Successfully");
+    },
+    [addCommentToPost.rejected]: (state) => {
+      state.postLoading = false;
+    },
+    [deleteCommentFromPost.pending]: (state) => {
+      state.postLoading = true;
+    },
+    [deleteCommentFromPost.fulfilled]: (state, action) => {
+      state.postLoading = false;
+      state.allPosts = action.payload;
+      ToastHandler("success", "Comment Removed Successfully");
+    },
+    [deleteCommentFromPost.rejected]: (state) => {
       state.postLoading = false;
     },
   },
