@@ -24,3 +24,6 @@ export { Profile } from "./profile/components/Profile";
 export { ProfileCard } from "./profile/components/ProfileCard";
 export { ProfileNav } from "./profile/components/ProfileNav";
 export { FollowingModal } from "./profile/components/FollowingModal";
+export { Bookmarks } from "./profile/components/Bookmarks";
+export { MyPosts } from "./profile/components/MyPosts";
+export { Notifications } from "./profile/components/Notofications";

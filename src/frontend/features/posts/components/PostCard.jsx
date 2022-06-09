@@ -26,9 +26,10 @@ import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetailsService } from "../../../services";
 import { useNavigate } from "react-router-dom";
-import { deletePost } from "../postsSlice";
+import { deletePost, dislikePost, likePost } from "../postsSlice";
 import { useUploadMedia } from "../hooks/useUploadMedia";
 import { EditPostModal } from "./EditPostModal";
+import { AddToBookmark, RemoveFromBookmark } from "../../auth/AuthSlice";
 
 export const PostCard = ({ postData }) => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -47,7 +48,7 @@ export const PostCard = ({ postData }) => {
     } else {
       setPostUserData(userDetails);
     }
-  }, [postData]);
+  }, [postData, userDetails]);
 
   return (
     <Box
@@ -162,7 +163,11 @@ export const PostCard = ({ postData }) => {
             ) ? (
               <ThumbUpRoundedIcon />
             ) : (
-              <ThumbUpOutlinedIcon />
+              <ThumbUpOutlinedIcon
+                onClick={() =>
+                  dispatch(likePost({ postId: postData._id, authToken }))
+                }
+              />
             )}
             <Text fontWeight="bold">{postData?.likes.likeCount}</Text>
           </Flex>
@@ -172,7 +177,11 @@ export const PostCard = ({ postData }) => {
             ) ? (
               <ThumbDownAltRoundedIcon />
             ) : (
-              <ThumbDownAltOutlinedIcon />
+              <ThumbDownAltOutlinedIcon
+                onClick={() =>
+                  dispatch(dislikePost({ postId: postData._id, authToken }))
+                }
+              />
             )}
             <Text>{postData?.likes.dislikedBy.length}</Text>
           </Flex>
@@ -185,7 +194,23 @@ export const PostCard = ({ postData }) => {
             <Text>Share</Text>
           </Flex>
           <Flex ml="auto" cursor="pointer">
-            <BookmarkBorderOutlinedIcon />
+            {userDetails?.bookmarks?.find(
+              (post) => post._id === postData._id
+            ) ? (
+              <BookmarkOutlinedIcon
+                onClick={() =>
+                  dispatch(
+                    RemoveFromBookmark({ postId: postData._id, authToken })
+                  )
+                }
+              />
+            ) : (
+              <BookmarkBorderOutlinedIcon
+                onClick={() =>
+                  dispatch(AddToBookmark({ postId: postData._id, authToken }))
+                }
+              />
+            )}
           </Flex>
         </Flex>
       </Flex>

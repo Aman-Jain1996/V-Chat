@@ -2,14 +2,8 @@ import {
   Avatar,
   Button,
   Flex,
-  FormControl,
   Heading,
   Image,
-  Input,
-  Popover,
-  PopoverBody,
-  PopoverContent,
-  PopoverTrigger,
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -18,8 +12,6 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import CloseIcon from "@mui/icons-material/Close";
 import {
   Link as ReachLink,
   NavLink,
@@ -27,6 +19,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { SearchBar } from "./SearchBar";
 
 export const Navigation = () => {
   const navigate = useNavigate();
@@ -75,34 +68,7 @@ export const Navigation = () => {
         width="16rem"
         px="4"
       >
-        <Popover flip={true} placement="bottom">
-          <PopoverTrigger>
-            <FormControl>
-              <Input
-                height="100%"
-                placeholder="Search User.."
-                variant="unstyled"
-                width="85%"
-                display="inline-flex"
-                justify="center"
-                align="center"
-              />
-              <SearchOutlinedIcon
-                style={{
-                  color: "#38bdf8",
-                  position: "absolute",
-                  right: "2%",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  cursor: "pointer",
-                }}
-              />
-            </FormControl>
-          </PopoverTrigger>
-          <PopoverContent maxH="60vh" overflowY="auto" w="16rem">
-            <PopoverBody>No User Found</PopoverBody>
-          </PopoverContent>
-        </Popover>
+        <SearchBar />
       </Flex>
       <Flex align="center" gap="8">
         <Flex align="center" gap="4">
@@ -168,8 +134,8 @@ export const Navigation = () => {
             mt="2"
             size="md"
             alignSelf="flex-start"
-            name={userDetails.firstName + userDetails.lastName}
-            src={userDetails.avatarURL}
+            name={userDetails?.firstName + userDetails?.lastName}
+            src={userDetails?.avatarURL}
             alt="user Image"
           />
         )}

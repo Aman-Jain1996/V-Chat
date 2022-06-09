@@ -10,24 +10,35 @@ import {
   getAllUsers,
   Home,
   Login,
+  Notifications,
   Profile,
   SignUp,
 } from "./frontend/features";
-import { Hero } from "./frontend/components";
+import { Hero, Loading } from "./frontend/components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { MyPosts } from "./frontend/features/profile/components/MyPosts";
+import { Bookmarks } from "./frontend/features/profile/components/Bookmarks";
 
 function App() {
   const dispatch = useDispatch();
-  const { userDetails, authToken } = useSelector((state) => state.auth);
+  const { authToken, isLoading } = useSelector((state) => state.auth);
+  const { profileLoading } = useSelector((state) => state.profile);
+  const { postLoading } = useSelector((state) => state.posts);
+  const { userLoading } = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(getAllUsers());
-    dispatch(getAllPosts());
-  }, [userDetails, authToken]);
+    if (authToken) {
+      dispatch(getAllUsers());
+      dispatch(getAllPosts());
+    }
+  }, [authToken]);
 
   return (
     <Box color={useColorModeValue("black.800", "gray.100")}>
+      {(isLoading || userLoading || postLoading || profileLoading) && (
+        <Loading />
+      )}
       <ToastContainer
         position="bottom-right"
         autoClose={false}
@@ -44,8 +55,12 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/user/:username" element={<Profile />} />
         <Route path="/explore" element={<Explore />} />
+        <Route path="/user/:username" element={<Profile />}>
+          <Route index element={<MyPosts />} />
+          <Route path="bookmarks" element={<Bookmarks />} />
+          <Route path="notifications" element={<Notifications />} />
+        </Route>
       </Routes>
     </Box>
   );

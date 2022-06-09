@@ -2,9 +2,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   createNewPostService,
   deletePostByIdService,
+  dislikePostService,
   editPostByIdService,
   getAllPostsService,
   getPostsByUsernameService,
+  likePostService,
 } from "../../services";
 import { ToastHandler } from "../../utils/toastUtils";
 
@@ -12,6 +14,7 @@ const initialState = {
   allPosts: [],
   userPosts: [],
   filterBy: "latest",
+  postLoading: false,
 };
 
 export const getUserPosts = createAsyncThunk(
@@ -78,6 +81,34 @@ export const deletePost = createAsyncThunk(
   }
 );
 
+export const likePost = createAsyncThunk(
+  "posts/likePost",
+  async ({ postId, authToken }, { rejectWithValue }) => {
+    try {
+      const response = await likePostService(postId, authToken);
+      ToastHandler("success", "Post Liked!");
+      return response.data.posts;
+    } catch (error) {
+      console.error(error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const dislikePost = createAsyncThunk(
+  "posts/dislikePost",
+  async ({ postId, authToken }, { rejectWithValue }) => {
+    try {
+      const response = await dislikePostService(postId, authToken);
+      ToastHandler("success", "Post Disliked!");
+      return response.data.posts;
+    } catch (error) {
+      console.error(error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -87,20 +118,75 @@ const postsSlice = createSlice({
     },
   },
   extraReducers: {
+    [getUserPosts.pending]: (state) => {
+      state.postLoading = true;
+    },
     [getUserPosts.fulfilled]: (state, action) => {
+      state.postLoading = false;
       state.userPosts = action.payload;
     },
+    [getUserPosts.rejected]: (state) => {
+      state.postLoading = false;
+    },
+    [getAllPosts.pending]: (state) => {
+      state.postLoading = true;
+    },
     [getAllPosts.fulfilled]: (state, action) => {
+      state.postLoading = false;
       state.allPosts = action.payload;
+    },
+    [getAllPosts.rejected]: (state) => {
+      state.postLoading = false;
+    },
+    [createPost.pending]: (state) => {
+      state.postLoading = true;
     },
     [createPost.fulfilled]: (state, action) => {
+      state.postLoading = false;
       state.allPosts = action.payload;
+    },
+    [createPost.rejected]: (state) => {
+      state.postLoading = false;
+    },
+    [updatePost.pending]: (state) => {
+      state.postLoading = true;
     },
     [updatePost.fulfilled]: (state, action) => {
+      state.postLoading = false;
       state.allPosts = action.payload;
     },
+    [updatePost.rejected]: (state) => {
+      state.postLoading = false;
+    },
+    [deletePost.pending]: (state) => {
+      state.postLoading = true;
+    },
     [deletePost.fulfilled]: (state, action) => {
+      state.postLoading = false;
       state.allPosts = action.payload;
+    },
+    [deletePost.rejected]: (state) => {
+      state.postLoading = false;
+    },
+    [likePost.pending]: (state) => {
+      state.postLoading = true;
+    },
+    [likePost.fulfilled]: (state, action) => {
+      state.postLoading = false;
+      state.allPosts = action.payload;
+    },
+    [likePost.rejected]: (state) => {
+      state.postLoading = false;
+    },
+    [dislikePost.pending]: (state) => {
+      state.postLoading = true;
+    },
+    [dislikePost.fulfilled]: (state, action) => {
+      state.postLoading = false;
+      state.allPosts = action.payload;
+    },
+    [dislikePost.rejected]: (state) => {
+      state.postLoading = false;
     },
   },
 });
