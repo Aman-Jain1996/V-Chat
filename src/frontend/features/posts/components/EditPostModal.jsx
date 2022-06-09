@@ -1,19 +1,11 @@
 import {
-  Avatar,
-  AvatarBadge,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
   MenuItem,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Text,
   useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";

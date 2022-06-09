@@ -9,12 +9,14 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserDetailsService } from "../services";
+import { followUser } from "../features";
 
 export const UserCard = ({ userData, modalData, onClose }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { authToken } = useSelector((state) => state.auth);
   const [activeUser, setActiveUser] = useState(userData);
 
   useEffect(() => {
@@ -73,6 +75,11 @@ export const UserCard = ({ userData, modalData, onClose }) => {
               alignSelf="center"
               _hover={{ bg: "cyan.500" }}
               _active={{ boxShadow: "md", bg: "cyan.300" }}
+              onClick={() =>
+                dispatch(
+                  followUser({ userId: userData?._id, authToken, dispatch })
+                )
+              }
             >
               <Text fontSize="sm">+ Follow</Text>
             </Button>

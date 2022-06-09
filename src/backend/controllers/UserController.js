@@ -23,7 +23,8 @@ export const getUserHandler = function (schema, request) {
   const username = request.params.username;
   try {
     const user = schema.users.findBy({ username: username }).attrs;
-    return new Response(200, {}, { user });
+    const { password, ...newUser } = user;
+    return new Response(200, {}, { user: newUser });
   } catch (error) {
     return new Response(
       500,
@@ -225,11 +226,17 @@ export const followUserHandler = function (schema, request) {
 
     const updatedUser = {
       ...user,
-      following: [...user.following, { ...followUser }],
+      following: [
+        ...user.following,
+        { _id: followUser._id, username: followUser.username },
+      ],
     };
     const updatedFollowUser = {
       ...followUser,
-      followers: [...followUser.followers, { ...user }],
+      followers: [
+        ...followUser.followers,
+        { _id: user._id, username: user.username },
+      ],
     };
     this.db.users.update(
       { _id: user._id },
@@ -242,7 +249,7 @@ export const followUserHandler = function (schema, request) {
     return new Response(
       200,
       {},
-      { user: updatedUser, followUser: updatedFollowUser }
+      { user: updatedUser, allUsers: this.db.users }
     );
   } catch (error) {
     return new Response(
@@ -307,7 +314,7 @@ export const unfollowUserHandler = function (schema, request) {
     return new Response(
       200,
       {},
-      { user: updatedUser, followUser: updatedFollowUser }
+      { user: updatedUser, allUsers: this.db.users }
     );
   } catch (error) {
     return new Response(

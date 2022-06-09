@@ -5,21 +5,21 @@ import { UserCard } from "../../../components";
 
 export const Suggestions = () => {
   const dispatch = useDispatch();
-  const { profileDetails } = useSelector((state) => state.profile);
   const { userDetails } = useSelector((state) => state.auth);
   const { colorMode, toggleColorMode } = useColorMode();
   const [suggestedUser, setSuggestedUser] = useState([]);
   const { users } = useSelector((state) => state.user);
 
   useEffect(() => {
-    const followingUserIds = userDetails?.following.map((user) => user._id);
-    const usersAvailableFollow = users
-      ?.filter((user) => !followingUserIds?.includes(user._id))
-      .filter((user) => user._id !== profileDetails?._id)
-      .filter((user) => user._id !== userDetails._id);
-
-    setSuggestedUser(usersAvailableFollow);
-  }, [profileDetails, userDetails, users]);
+    setSuggestedUser(
+      users?.filter(
+        (currUser) =>
+          !userDetails.following.find(
+            (innerCurrUser) => innerCurrUser._id === currUser._id
+          ) && currUser.username !== userDetails.username
+      )
+    );
+  }, [users, userDetails]);
 
   return (
     <Flex direction="column" align="center" py="4" px="8" gap="8" w="100%">

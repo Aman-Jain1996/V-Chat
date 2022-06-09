@@ -72,7 +72,7 @@ export const users = [
     updatedAt: "2022-05-17T10:33:36+05:30",
     avatarURL:
       "https://res.cloudinary.com/ajain8479/image/upload/v1653216526/Social%20Media/4333609_iftyzl.webp",
-    websiteURL: "https://google.com",
+    websiteURL: "https://www.linkedin.com/in/divya-gupta-068961218/",
     bio: "Hi this is Divya , an ETL Developer working in Infosys",
     followers: [
       {
@@ -119,7 +119,7 @@ export const users = [
     updatedAt: "2022-05-17T11:07:58+05:30",
     avatarURL:
       "https://res.cloudinary.com/ajain8479/image/upload/v1653216526/Social%20Media/4333609_iftyzl.webp",
-    websiteURL: "https://google.com",
+    websiteURL: "https://www.linkedin.com/in/vishal-singh-2892a6124/",
     bio: "Hi, I am Vishal Singh , aspiring Java Developer",
     followers: [
       {
@@ -162,7 +162,7 @@ export const users = [
     updatedAt: "2022-05-17T11:07:58+05:30",
     avatarURL:
       "https://res.cloudinary.com/ajain8479/image/upload/v1653216526/Social%20Media/4333609_iftyzl.webp",
-    websiteURL: "https://google.com",
+    websiteURL: "https://www.linkedin.com/in/singh-akash1/",
     bio: "Senior Data Analyst @OYO",
     followers: [
       {
@@ -201,7 +201,7 @@ export const users = [
     updatedAt: "2022-05-17T11:07:27+05:30",
     avatarURL:
       "https://res.cloudinary.com/donqbxlnc/image/upload/v1652425327/images_jt3uha.jpg",
-    websiteURL: "https://google.com",
+    websiteURL: "https://www.linkedin.com/in/vishalgta/",
     bio: "Solution Advisor @Deloitte | SAP Professional | Scrum Certified (SFC) | Ex-Birlasoftian | Learning Cloud Technology",
     followers: [
       {
@@ -256,7 +256,7 @@ export const users = [
     updatedAt: "2022-05-17T10:24:04+05:30",
     avatarURL:
       "https://res.cloudinary.com/donqbxlnc/image/upload/v1652427577/ro2zurljoctvqo2kwyya.jpg",
-    websiteURL: "https://google.com",
+    websiteURL: "https://sparrow_jack.com",
     bio: "Certified Bussiness Analyst",
     followers: [
       {
@@ -282,7 +282,7 @@ export const users = [
     updatedAt: "2022-05-17T10:33:36+05:30",
     avatarURL:
       "https://res.cloudinary.com/donqbxlnc/image/upload/v1652427682/images_fsjfno.jpg",
-    websiteURL: "https://google.com",
+    websiteURL: "https://alex_pandian.com",
     bio: "SDE-1 at Google",
     followers: [
       {
@@ -313,7 +313,7 @@ export const users = [
     updatedAt: "2022-05-16T18:11:01+05:30",
     avatarURL:
       "https://res.cloudinary.com/donqbxlnc/image/upload/v1652427968/images_dmm7fi.jpg",
-    websiteURL: "https://sarithachandra.netlify.app",
+    websiteURL: "https://jain_priyanka.com",
     bio: "Hey , I am Priyanka working @Genpact",
     followers: [
       {
@@ -343,7 +343,7 @@ export const users = [
     updatedAt: "2022-05-16T18:11:01+05:30",
     avatarURL:
       "https://res.cloudinary.com/donqbxlnc/image/upload/v1652428194/images_misbxu.jpg",
-    websiteURL: "https://aashitajha.netlify.app",
+    websiteURL: "https://aadarsh_balak.com",
     bio: "Learing new Technologies in frontend",
     followers: [],
     following: [],

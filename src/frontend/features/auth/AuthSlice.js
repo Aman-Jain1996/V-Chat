@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
+  addPostToBookmarkService,
   LoginService,
+  removePostFromBookmarkService,
   SignUpService,
   updateUserDetailsService,
 } from "../../services";
@@ -57,6 +59,34 @@ export const updateUserDetails = createAsyncThunk(
   }
 );
 
+export const AddToBookmark = createAsyncThunk(
+  "auth/AddToBookmark",
+  async ({ postId, authToken }, { rejectWithValue }) => {
+    try {
+      const response = await addPostToBookmarkService(postId, authToken);
+      ToastHandler("success", "Bookmarked Successfully!");
+      return response.data.bookmarks;
+    } catch (error) {
+      console.error(error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const RemoveFromBookmark = createAsyncThunk(
+  "auth/RemoveFromBookmark",
+  async ({ postId, authToken }, { rejectWithValue }) => {
+    try {
+      const response = await removePostFromBookmarkService(postId, authToken);
+      ToastHandler("success", "Removed Bookmark Successfully!");
+      return response.data.bookmarks;
+    } catch (error) {
+      console.error(error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   authToken: JSON.parse(localStorage.getItem("authToken"))?.token,
   userDetails: JSON.parse(localStorage.getItem("userDetails"))?.user,
@@ -78,10 +108,10 @@ const authSlice = createSlice({
   },
   extraReducers: {
     [loginAction.pending]: (state) => {
-      state.isLoading = "true";
+      state.isLoading = true;
     },
     [loginAction.fulfilled]: (state, action) => {
-      state.isLoading = "false";
+      state.isLoading = false;
       state.authToken = action.payload.encodedToken;
       state.userDetails = action.payload.user;
       localStorage.setItem(
@@ -95,13 +125,13 @@ const authSlice = createSlice({
       ToastHandler("success", "Logged-In Successfully!");
     },
     [loginAction.rejected]: (state) => {
-      state.isLoading = "false";
+      state.isLoading = false;
     },
     [signUpAction.pending]: (state) => {
-      state.isLoading = "true";
+      state.isLoading = true;
     },
     [signUpAction.fulfilled]: (state, action) => {
-      state.isLoading = "false";
+      state.isLoading = false;
       state.authToken = action.payload.encodedToken;
       state.userDetails = action.payload.user;
       localStorage.setItem(
@@ -115,15 +145,38 @@ const authSlice = createSlice({
       ToastHandler("success", "Signed-In Successfully!");
     },
     [signUpAction.rejected]: (state) => {
-      state.isLoading = "false";
+      state.isLoading = false;
+    },
+    [updateUserDetails.pending]: (state) => {
+      state.isLoading = true;
     },
     [updateUserDetails.fulfilled]: (state, action) => {
+      state.isLoading = false;
       state.userDetails = action.payload;
-      localStorage.setItem(
-        "userDetails",
-        JSON.stringify({ user: state.userDetails })
-      );
       ToastHandler("success", "Profile Updated");
+    },
+    [updateUserDetails.rejected]: (state) => {
+      state.isLoading = false;
+    },
+    [AddToBookmark.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [AddToBookmark.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.userDetails.bookmarks = action.payload;
+    },
+    [AddToBookmark.rejected]: (state) => {
+      state.isLoading = false;
+    },
+    [RemoveFromBookmark.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [RemoveFromBookmark.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.userDetails.bookmarks = action.payload;
+    },
+    [RemoveFromBookmark.rejected]: (state) => {
+      state.isLoading = false;
     },
   },
 });

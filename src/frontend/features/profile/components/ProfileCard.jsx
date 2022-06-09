@@ -10,28 +10,48 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { EditProfile, logout, FollowingModal } from "../../../features";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  EditProfile,
+  logout,
+  FollowingModal,
+  unFollowUser,
+} from "../../../features";
+import { followUser } from "../../home/usersSlice";
+import { fetchUserDetails } from "../ProfileSlice";
+import { getUserPosts } from "../../posts/postsSlice";
+import { Loading } from "../../../components";
 
-export const ProfileCard = ({ profileDetails, userPosts }) => {
+export const ProfileCard = () => {
+  const { username } = useParams();
+  const { colorMode, toggleColorMode } = useColorMode();
+  const { profileDetails } = useSelector((state) => state.profile);
+  const { userDetails, authToken } = useSelector((state) => state.auth);
+  const { userPosts } = useSelector((state) => state.posts);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { userDetails } = useSelector((state) => state.auth);
-  const { colorMode, toggleColorMode } = useColorMode();
 
-  return (
+  useEffect(() => {
+    dispatch(fetchUserDetails(username));
+    dispatch(getUserPosts(username));
+  }, [username]);
+
+  return profileDetails?.username !== username ? (
+    <Loading />
+  ) : (
     <Flex
       direction="column"
       align="center"
       justify="center"
       position="relative"
     >
-      {profileDetails.username === userDetails.username ? (
+      {userDetails?.username === username ? (
         <IconButton
-          color={useColorModeValue("black", "white")}
+          color="inherit"
           title="Logout"
           position="absolute"
           right="8"
@@ -46,14 +66,40 @@ export const ProfileCard = ({ profileDetails, userPosts }) => {
         ></IconButton>
       ) : (
         <Box position="absolute" top="4" right="4">
-          {userDetails.following.find(
+          {userDetails?.following.find(
             (user) => user._id === profileDetails._id
           ) ? (
-            <Button aria-label="Following Button" my="4" variant="outline">
+            <Button
+              aria-label="Following Button"
+              my="4"
+              variant="outline"
+              onClick={() =>
+                dispatch(
+                  unFollowUser({
+                    userId: profileDetails?._id,
+                    authToken,
+                    dispatch,
+                  })
+                )
+              }
+            >
               Following
             </Button>
           ) : (
-            <Button aria-label="Following Button" my="4" variant="outline">
+            <Button
+              aria-label="Following Button"
+              my="4"
+              variant="outline"
+              onClick={() =>
+                dispatch(
+                  followUser({
+                    userId: profileDetails?._id,
+                    authToken,
+                    dispatch,
+                  })
+                )
+              }
+            >
               Follow
             </Button>
           )}
@@ -66,7 +112,7 @@ export const ProfileCard = ({ profileDetails, userPosts }) => {
           alignSelf="flex-start"
           name={profileDetails?.firstName + profileDetails?.lastName}
           src={
-            profileDetails.username === userDetails.username
+            profileDetails?.username === userDetails?.username
               ? userDetails?.avatarURL
               : profileDetails?.avatarURL
           }
@@ -83,11 +129,11 @@ export const ProfileCard = ({ profileDetails, userPosts }) => {
       <Text
         my="2"
         fontSize="sm"
-        color={useColorModeValue("gray.700", "gray.300")}
+        // color={useColorModeValue("gray.700", "gray.300")}
       >
         {"@" + profileDetails?.username}
       </Text>
-      {profileDetails.username === userDetails.username && (
+      {profileDetails.username === userDetails?.username && (
         <EditProfile profileDetails={profileDetails} />
       )}
       {profileDetails?.bio && (

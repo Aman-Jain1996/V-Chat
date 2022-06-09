@@ -1,9 +1,8 @@
 import { Flex, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { Navigation, ScrollToTop } from "../../../components";
+import { Navigation, ScrollToTop, SortButton } from "../../../components";
 import { PostCard, Suggestions } from "../../../features";
 import { useSelector } from "react-redux";
-import { SortButton } from "../../../components/SortButton";
 
 export const Explore = () => {
   const { allPosts, filterBy } = useSelector((state) => state.posts);

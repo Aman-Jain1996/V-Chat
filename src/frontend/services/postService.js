@@ -36,3 +36,54 @@ export const editPostByIdService = async (postData, encodedToken) =>
       },
     }
   );
+
+export const likePostService = async (postId, encodedToken) =>
+  axios.post(
+    `/api/posts/like/${postId}`,
+    {},
+    {
+      headers: {
+        authorization: encodedToken,
+      },
+    }
+  );
+
+export const dislikePostService = async (postId, encodedToken) =>
+  axios.post(
+    `/api/posts/dislike/${postId}`,
+    {},
+    {
+      headers: {
+        authorization: encodedToken,
+      },
+    }
+  );
+
+export const getAllBookmarksService = async (encodedToken) =>
+  axios.get("/api/users/bookmark", {
+    headers: {
+      authorization: encodedToken,
+    },
+  });
+
+export const addPostToBookmarkService = async (postId, encodedToken) =>
+  axios.post(
+    `/api/users/bookmark/${postId}`,
+    {},
+    {
+      headers: {
+        authorization: encodedToken,
+      },
+    }
+  );
+
+export const removePostFromBookmarkService = async (postId, encodedToken) =>
+  axios.post(
+    `/api/users/remove-bookmark/${postId}`,
+    {},
+    {
+      headers: {
+        authorization: encodedToken,
+      },
+    }
+  );

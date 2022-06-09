@@ -1,10 +1,9 @@
 import { Divider, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { Navigation, ScrollToTop } from "../../../components";
+import { Navigation, ScrollToTop, SortButton } from "../../../components";
 import { CreatePost, PostCard } from "../../../features";
 import { Suggestions } from "./Suggestions";
 import { useSelector } from "react-redux";
-import { SortButton } from "../../../components/SortButton";
 
 export const Home = () => {
   const { allPosts, filterBy } = useSelector((state) => state.posts);
