@@ -14,6 +14,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { CommentCard } from "./CommentCard";
 import { getCommentsByPostIdService } from "../../../services";
 import { addCommentToPost } from "../postsSlice";
+import { ToastHandler } from "../../../utils/toastUtils";
 
 export const PostComment = ({ postId }) => {
   const { userDetails, authToken } = useSelector((state) => state.auth);
@@ -86,6 +87,7 @@ export const PostComment = ({ postId }) => {
           position="relative"
         >
           <Input
+            isRequired
             height="100%"
             placeholder="Post Your Comment"
             variant="unstyled"
@@ -105,13 +107,16 @@ export const PostComment = ({ postId }) => {
             variant="iconButton"
             color="cyan.400"
             onClick={() => {
-              dispatch(
-                addCommentToPost({
-                  postId,
-                  commentData: { content: postInput },
-                  authToken,
-                })
-              );
+              if (postInput.trim() === "")
+                ToastHandler("warn", "Post can't empty");
+              else
+                dispatch(
+                  addCommentToPost({
+                    postId,
+                    commentData: { content: postInput },
+                    authToken,
+                  })
+                );
               setPostInput("");
             }}
           >

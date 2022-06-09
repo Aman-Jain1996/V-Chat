@@ -162,6 +162,7 @@ export const deletePostCommentHandler = function (schema, request) {
  * */
 
 export const upvotePostCommentHandler = function (schema, request) {
+  let liked;
   const user = requiresAuth.call(this, request);
   try {
     if (!user) {
@@ -189,9 +190,16 @@ export const upvotePostCommentHandler = function (schema, request) {
       post.comments[commentIndex].votes.upvotedBy = post.comments[
         commentIndex
       ].votes.upvotedBy.filter((us) => us._id !== user._id);
-    } else post.comments[commentIndex].votes.upvotedBy.push(user);
+      liked = false;
+    } else {
+      post.comments[commentIndex].votes.upvotedBy.push({
+        _id: user._id,
+        username: user.username,
+      });
+      liked = true;
+    }
     this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
-    return new Response(201, {}, { posts: this.db.posts });
+    return new Response(201, {}, { posts: this.db.posts, liked });
   } catch (error) {
     return new Response(
       500,

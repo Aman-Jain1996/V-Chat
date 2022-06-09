@@ -5,10 +5,12 @@ import {
   deleteCommentOnPostService,
   deletePostByIdService,
   dislikePostService,
+  editCommentInPostService,
   editPostByIdService,
   getAllPostsService,
   getCommentsByPostIdService,
   getPostsByUsernameService,
+  likeCommentService,
   likePostService,
 } from "../../services";
 import { ToastHandler } from "../../utils/toastUtils";
@@ -124,7 +126,28 @@ export const addCommentToPost = createAsyncThunk(
       return response.data.posts;
     } catch (err) {
       console.error(err.response.data);
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const editCommentOnPost = createAsyncThunk(
+  "posts/editCommentOnPost",
+  async (
+    { postId, commentId, commentData, authToken },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await editCommentInPostService(
+        postId,
+        commentId,
+        commentData,
+        authToken
+      );
+      return response.data.posts;
+    } catch (err) {
+      console.error(err.response.data);
+      return rejectWithValue(err.response.data);
     }
   }
 );
@@ -141,7 +164,20 @@ export const deleteCommentFromPost = createAsyncThunk(
       return response.data.posts;
     } catch (err) {
       console.error(err.response.data);
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const likeCommentOnPost = createAsyncThunk(
+  "posts/likeCommentOnPost",
+  async ({ postId, commentId, authToken }, { rejectWithValue }) => {
+    try {
+      const response = await likeCommentService(postId, commentId, authToken);
+      return response.data;
+    } catch (err) {
+      console.error(err.response.data);
+      return rejectWithValue(err.response.data);
     }
   }
 );
@@ -236,6 +272,17 @@ const postsSlice = createSlice({
     [addCommentToPost.rejected]: (state) => {
       state.postLoading = false;
     },
+    [editCommentOnPost.pending]: (state) => {
+      state.postLoading = true;
+    },
+    [editCommentOnPost.fulfilled]: (state, action) => {
+      state.postLoading = false;
+      state.allPosts = action.payload;
+      ToastHandler("success", "Comment Updated Successfully");
+    },
+    [editCommentOnPost.rejected]: (state) => {
+      state.postLoading = false;
+    },
     [deleteCommentFromPost.pending]: (state) => {
       state.postLoading = true;
     },
@@ -245,6 +292,19 @@ const postsSlice = createSlice({
       ToastHandler("success", "Comment Removed Successfully");
     },
     [deleteCommentFromPost.rejected]: (state) => {
+      state.postLoading = false;
+    },
+    [likeCommentOnPost.pending]: (state) => {
+      state.postLoading = true;
+    },
+    [likeCommentOnPost.fulfilled]: (state, action) => {
+      state.postLoading = false;
+      state.allPosts = action.payload.posts;
+      if (action.payload.liked)
+        ToastHandler("success", "Comment Liked Successfully");
+      else ToastHandler("success", "Comment Disliked Successfully");
+    },
+    [likeCommentOnPost.rejected]: (state) => {
       state.postLoading = false;
     },
   },
