@@ -20,7 +20,7 @@ export const PostComment = ({ postId }) => {
   const { userDetails, authToken } = useSelector((state) => state.auth);
   const { allPosts } = useSelector((state) => state.posts);
   const [postComments, setPostComments] = useState([]);
-  const [postToShow, setPostToShow] = useState(2);
+  const [postToShow, setPostToShow] = useState(1);
   const [postInput, setPostInput] = useState("");
   const dispatch = useDispatch();
 
@@ -47,7 +47,7 @@ export const PostComment = ({ postId }) => {
           />
         ))}
       </Box>
-      {postComments.length > 2 && postToShow === 2 && (
+      {postComments.length > 1 && postToShow === 1 && (
         <Text
           mt="4"
           ml="16"
@@ -58,13 +58,13 @@ export const PostComment = ({ postId }) => {
           Show All Comments
         </Text>
       )}
-      {postComments.length > 2 && postToShow > 2 && (
+      {postComments.length > 1 && postToShow > 1 && (
         <Text
           mt="4"
           ml="16"
           cursor="pointer"
           fontSize="sm"
-          onClick={() => setPostToShow(2)}
+          onClick={() => setPostToShow(1)}
         >
           Show Less Comments
         </Text>
