@@ -5,3 +5,5 @@ export { UserCard } from "./UserCard";
 export { ScrollToTop } from "./ScrollToTop";
 export { SortButton } from "./SortButton";
 export { SearchBar } from "./SearchBar";
+export { PrivateRoute } from "./PrivateRoute";
+export { NotFound } from "./NotFound";

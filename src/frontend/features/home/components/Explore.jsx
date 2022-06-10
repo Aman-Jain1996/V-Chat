@@ -1,6 +1,11 @@
 import { Flex, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { Navigation, ScrollToTop, SortButton } from "../../../components";
+import {
+  Loading,
+  Navigation,
+  ScrollToTop,
+  SortButton,
+} from "../../../components";
 import { PostCard, Suggestions } from "../../../features";
 import { useSelector } from "react-redux";
 
@@ -26,7 +31,7 @@ export const Explore = () => {
   }, [userDetails, allPosts, filterBy]);
 
   return !filteredPosts.length ? (
-    <>Loading...</>
+    <Loading />
   ) : (
     <>
       <ScrollToTop />

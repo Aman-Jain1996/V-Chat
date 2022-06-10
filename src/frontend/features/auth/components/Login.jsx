@@ -16,7 +16,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
@@ -27,12 +27,12 @@ import { Navigation } from "../../../components";
 export const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const authToken = useSelector((state) => state.auth.authToken);
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
-    authToken &&
-      navigate(location?.state?.from?.pathname || "/home", { replace: true });
+    authToken && navigate(location?.state?.path ?? "/home", { replace: true });
   }, [authToken]);
 
   const loginHandler = ({ username, password }) => {
