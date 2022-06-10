@@ -1,11 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
+  addCommentToPostService,
   createNewPostService,
+  deleteCommentOnPostService,
   deletePostByIdService,
   dislikePostService,
+  editCommentInPostService,
   editPostByIdService,
   getAllPostsService,
+  getCommentsByPostIdService,
   getPostsByUsernameService,
+  likeCommentService,
   likePostService,
 } from "../../services";
 import { ToastHandler } from "../../utils/toastUtils";
@@ -109,6 +114,74 @@ export const dislikePost = createAsyncThunk(
   }
 );
 
+export const addCommentToPost = createAsyncThunk(
+  "posts/addCommentToPost",
+  async ({ postId, commentData, authToken }, { rejectWithValue }) => {
+    try {
+      const response = await addCommentToPostService(
+        postId,
+        commentData,
+        authToken
+      );
+      return response.data.posts;
+    } catch (err) {
+      console.error(err.response.data);
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const editCommentOnPost = createAsyncThunk(
+  "posts/editCommentOnPost",
+  async (
+    { postId, commentId, commentData, authToken },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await editCommentInPostService(
+        postId,
+        commentId,
+        commentData,
+        authToken
+      );
+      return response.data.posts;
+    } catch (err) {
+      console.error(err.response.data);
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const deleteCommentFromPost = createAsyncThunk(
+  "posts/deleteCommentFromPost",
+  async ({ postId, commentId, authToken }, { rejectWithValue }) => {
+    try {
+      const response = await deleteCommentOnPostService(
+        postId,
+        commentId,
+        authToken
+      );
+      return response.data.posts;
+    } catch (err) {
+      console.error(err.response.data);
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const likeCommentOnPost = createAsyncThunk(
+  "posts/likeCommentOnPost",
+  async ({ postId, commentId, authToken }, { rejectWithValue }) => {
+    try {
+      const response = await likeCommentService(postId, commentId, authToken);
+      return response.data;
+    } catch (err) {
+      console.error(err.response.data);
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -186,6 +259,52 @@ const postsSlice = createSlice({
       state.allPosts = action.payload;
     },
     [dislikePost.rejected]: (state) => {
+      state.postLoading = false;
+    },
+    [addCommentToPost.pending]: (state) => {
+      state.postLoading = true;
+    },
+    [addCommentToPost.fulfilled]: (state, action) => {
+      state.postLoading = false;
+      state.allPosts = action.payload;
+      ToastHandler("success", "Comment Added Successfully");
+    },
+    [addCommentToPost.rejected]: (state) => {
+      state.postLoading = false;
+    },
+    [editCommentOnPost.pending]: (state) => {
+      state.postLoading = true;
+    },
+    [editCommentOnPost.fulfilled]: (state, action) => {
+      state.postLoading = false;
+      state.allPosts = action.payload;
+      ToastHandler("success", "Comment Updated Successfully");
+    },
+    [editCommentOnPost.rejected]: (state) => {
+      state.postLoading = false;
+    },
+    [deleteCommentFromPost.pending]: (state) => {
+      state.postLoading = true;
+    },
+    [deleteCommentFromPost.fulfilled]: (state, action) => {
+      state.postLoading = false;
+      state.allPosts = action.payload;
+      ToastHandler("success", "Comment Removed Successfully");
+    },
+    [deleteCommentFromPost.rejected]: (state) => {
+      state.postLoading = false;
+    },
+    [likeCommentOnPost.pending]: (state) => {
+      state.postLoading = true;
+    },
+    [likeCommentOnPost.fulfilled]: (state, action) => {
+      state.postLoading = false;
+      state.allPosts = action.payload.posts;
+      if (action.payload.liked)
+        ToastHandler("success", "Comment Liked Successfully");
+      else ToastHandler("success", "Comment Disliked Successfully");
+    },
+    [likeCommentOnPost.rejected]: (state) => {
       state.postLoading = false;
     },
   },

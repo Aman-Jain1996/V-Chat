@@ -71,7 +71,7 @@ export const users = [
     createdAt: "2022-01-25T10:38:12+05:30",
     updatedAt: "2022-05-17T10:33:36+05:30",
     avatarURL:
-      "https://res.cloudinary.com/ajain8479/image/upload/v1653216526/Social%20Media/4333609_iftyzl.webp",
+      "https://res.cloudinary.com/ajain8479/image/upload/v1654785716/Social%20Media/om1mymzbs6ybq3xof4rq.webp",
     websiteURL: "https://www.linkedin.com/in/divya-gupta-068961218/",
     bio: "Hi this is Divya , an ETL Developer working in Infosys",
     followers: [
@@ -118,7 +118,7 @@ export const users = [
     createdAt: "2022-03-21T10:12:12+05:30",
     updatedAt: "2022-05-17T11:07:58+05:30",
     avatarURL:
-      "https://res.cloudinary.com/ajain8479/image/upload/v1653216526/Social%20Media/4333609_iftyzl.webp",
+      "https://res.cloudinary.com/ajain8479/image/upload/v1654786597/Social%20Media/by10nklvebd3f7i4hlux.webp",
     websiteURL: "https://www.linkedin.com/in/vishal-singh-2892a6124/",
     bio: "Hi, I am Vishal Singh , aspiring Java Developer",
     followers: [
@@ -161,7 +161,7 @@ export const users = [
     createdAt: "2022-05-12T08:30:12+05:30",
     updatedAt: "2022-05-17T11:07:58+05:30",
     avatarURL:
-      "https://res.cloudinary.com/ajain8479/image/upload/v1653216526/Social%20Media/4333609_iftyzl.webp",
+      "https://res.cloudinary.com/ajain8479/image/upload/v1654786662/Social%20Media/szbdjr40nyj8oedqa91r.webp",
     websiteURL: "https://www.linkedin.com/in/singh-akash1/",
     bio: "Senior Data Analyst @OYO",
     followers: [

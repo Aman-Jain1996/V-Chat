@@ -16,6 +16,8 @@ export { EmojiContainer } from "./posts/components/EmojiContainer";
 export { PostCard } from "./posts/components/PostCard";
 export { useUploadMedia } from "./posts/hooks/useUploadMedia";
 export { EditPostModal } from "./posts/components/EditPostModal";
+export { PostComment } from "./posts/components/PostComment";
+export { CommentCard } from "./posts/components/CommentCard";
 
 // Profile Exports
 export * from "./profile/ProfileSlice";

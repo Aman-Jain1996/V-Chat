@@ -30,6 +30,7 @@ import { deletePost, dislikePost, likePost } from "../postsSlice";
 import { useUploadMedia } from "../hooks/useUploadMedia";
 import { EditPostModal } from "./EditPostModal";
 import { AddToBookmark, RemoveFromBookmark } from "../../auth/AuthSlice";
+import { PostComment } from "./PostComment";
 
 export const PostCard = ({ postData }) => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -144,7 +145,7 @@ export const PostCard = ({ postData }) => {
               (postData?.mediaURL.split("/")[4] === "image" ? (
                 <Image src={postData?.mediaURL} alt="post image" />
               ) : (
-                <video controls>
+                <video controls style={{ width: "100%" }}>
                   <source src={postData?.mediaURL} />
                 </video>
               ))}
@@ -213,6 +214,7 @@ export const PostCard = ({ postData }) => {
             )}
           </Flex>
         </Flex>
+        <PostComment postId={postData._id} />
       </Flex>
     </Box>
   );
