@@ -71,7 +71,7 @@ export const Navigation = () => {
       >
         <SearchBar />
       </Flex>
-      }
+      )}
       <Flex align="center" gap="8">
         <Flex align="center" gap="4">
           {location.pathname !== "/login" && location.pathname !== "/signUp" && (
