@@ -56,6 +56,7 @@ export const Navigation = () => {
           </Heading>
         </Flex>
       </ReachLink>
+      {location.pathname !== "/login" && location.pathname !== "/signUp" && (
       <Flex
         bg={useColorModeValue("#efefef", "whiteAlpha.200")}
         color={useColorModeValue("black.800", "white.800")}
@@ -70,6 +71,7 @@ export const Navigation = () => {
       >
         <SearchBar />
       </Flex>
+      }
       <Flex align="center" gap="8">
         <Flex align="center" gap="4">
           {location.pathname !== "/login" && location.pathname !== "/signUp" && (
