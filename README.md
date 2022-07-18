@@ -1,6 +1,6 @@
 
 <div align="center">
-  <img src="https://res.cloudinary.com/ajain8479/image/upload/v1652887180/Social%20Media/logo512_n05pnf.webp" height="100" width="100" alt="logo"/>
+  <a href="https://vchat-react.vercel.app/"><img src="https://res.cloudinary.com/ajain8479/image/upload/v1652887180/Social%20Media/logo512_n05pnf.webp" height="100" width="100" alt="logo"/></a>
   <h1>V-Chat</h1>
     <p>V-Chat is a Social Media App like Instagram / Twitter where user can share posts and learnings.</p>
  </div>
